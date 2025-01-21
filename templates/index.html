@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BDM-Bot</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.6/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js"></script>
+</head>
+  </head>
+  <body>
+    <div class="container">
+      <h1>BDM-Bot</h1>
+      <div id="chat-box"></div>
+      <input
+        type="text"
+        id="user-input"
+        placeholder="Type your message here..."
+      />
+      <button id="send-btn">Send</button>
+    </div>
+
+    <script>
+      const chatBox = document.getElementById("chat-box");
+      const userInput = document.getElementById("user-input");
+      const sendBtn = document.getElementById("send-btn");
+
+      function sendMessage() {
+        const message = userInput.value.trim();
+        if (!message) return;
+        chatBox.innerHTML += `<div class="message user">You: ${message}</div>`;
+        userInput.value = "";
+
+        fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const botMessage = data.response;
+            const renderedMessage = DOMPurify.sanitize(marked.parse(botMessage));
+            chatBox.innerHTML += `<div class="message bot">Bot: ${renderedMessage}</div>`;
+            if (data.stop) {
+              chatBox.innerHTML += `<div class="message bot">Chat ended.</div>`;
+              userInput.disabled = true;
+              sendBtn.disabled = true;
+            }
+            chatBox.scrollTop = chatBox.scrollHeight;
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+      sendBtn.addEventListener("click", sendMessage);
+      userInput.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+          sendMessage();
+        }
+      });
+    </script>
+  </body>
+</html>

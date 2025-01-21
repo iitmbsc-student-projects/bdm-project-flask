@@ -1,0 +1,10 @@
+flask
+groq
+langchain_community
+langchain
+faiss-cpu
+sentence-transformers
+langchain-huggingface
+langchain_core
+langchain_groq
+pyyaml
