@@ -13,19 +13,25 @@ body {
   width: 1300px;
   height: 700px;
   background: #fff;
-  padding: 20px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 h1 {
+  margin-top: 10px;
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+  font-size: x-large;
+  color: #164e63;
 }
 
 #chat-box {
-  height: 500px;
+  height: 550px;
   overflow-y: auto;
   margin-bottom: 10px;
   border: 1px solid #ddd;
@@ -41,15 +47,27 @@ h1 {
 
 .message.user {
   text-align: right;
-  color: #007bff;
+  color: #155e75;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  float: right;
+  font-family: "Roboto", sans-serif;
+  font-size: large;
 }
 
 .message.bot {
   text-align: left;
-  color: #28a745;
+  color: #0e7490;
+  margin-top: 20px;
+  padding-top: 25px;
+  font-family: "Roboto", sans-serif;
+  font-size: large;
+  max-width: 66%;
 }
 
-#user-input {
+/* #user-input {
   width: calc(100% - 50px);
   padding: 10px;
   border: 1px solid #ddd;
@@ -68,4 +86,37 @@ h1 {
 
 #send-btn:hover {
   background: #0056b3;
+} */
+
+.input-container {
+  position: absolute;
+  width: 1300px;
+}
+
+#user-input {
+  width: 1250px;
+  padding: 10px 10px 10px 10px; /* Add padding to the right to make space for the button */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: "Roboto", sans-serif;
+  font-size: large;
+}
+
+#send-btn {
+  position: absolute;
+  right: 20px; /* Position the button inside the input box */
+  top: 50%;
+  transform: translateY(-50%); /* Vertically center the button */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#send-btn i {
+  color: #06b6d4; /* Icon color */
+  font-size: 18px;
+}
+
+#send-btn:hover i {
+  color: #0e7490; /* Change icon color on hover */
 }

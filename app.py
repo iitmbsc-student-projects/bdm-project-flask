@@ -87,8 +87,13 @@ def chat():
     for source, pages in sources.items():
         sorted_pages = sorted(pages)  
         page_str = ", ".join(map(str, sorted_pages))  
-        source_info.append(f"{len(source_info) + 1}. {source}, Pages: {page_str}")
-    answer_with_sources = f"Answer: {answer}\n\nSources:\n" + "\n".join(source_info)
+
+        file_name = source.replace(" ", "%20")
+        link = f"https://github.com/brpuneet898/bdm-project-flask/blob/main/documents/{file_name}"
+        source_info.append(f"{len(source_info) + 1}. [{source}]({link}), Page Number: {page_str}")
+
+        # source_info.append(f"{len(source_info) + 1}. {source}, Page Number: {page_str}")
+    answer_with_sources = f"**Bot:** {answer}\n\n**Sources:**\n" + "\n".join(source_info)
     insert_chat(user_input, answer_with_sources)
     return jsonify({'response': answer_with_sources, 'stop': False})    
 
