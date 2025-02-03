@@ -22,7 +22,7 @@ def load_model():
     if model is None:
         model = ChatGroq(
             temperature=0.8,
-            model="llama3-8b-8192",
+            model="llama-3.3-70b-versatile",
             groq_api_key= config["GROQ_API_KEY"]
         )
     return model
@@ -91,8 +91,6 @@ def chat():
         file_name = source.replace(" ", "%20")
         link = f"https://github.com/brpuneet898/bdm-project-flask/blob/main/documents/{file_name}"
         source_info.append(f"{len(source_info) + 1}. [{source}]({link}), Page Number: {page_str}")
-
-        # source_info.append(f"{len(source_info) + 1}. {source}, Page Number: {page_str}")
     answer_with_sources = f"{answer}\n\n**Sources:**\n" + "\n".join(source_info)
     insert_chat(user_input, answer_with_sources)
     return jsonify({'response': answer_with_sources, 'stop': False})    
@@ -103,10 +101,10 @@ if __name__ == "__main__":
     vector_store_path = os.path.join(os.path.dirname(__file__), "vector_store")
     if os.path.exists(documents_dir):
         vector_store, total_characters, total_pdfs, split_documents, total_splits = read_and_split_pdfs(documents_dir, vector_store_path)
-        # print(f"Total number of characters read from all PDFs: {total_characters}") #2165673
-        # print(f"Total number of PDFs present: {total_pdfs}") #32
-        # print(f"Total number of split documents: {len(split_documents)}") #1256
-        # print(f"Total number of split documents stored: {total_splits}") #1256
+        print(f"Total number of characters read from all PDFs: {total_characters}") 
+        print(f"Total number of PDFs present: {total_pdfs}") 
+        print(f"Total number of split documents: {len(split_documents)}") 
+        print(f"Total number of split documents stored: {total_splits}") 
     else:
         print(f"Error: Directory '{documents_dir}' does not exist.")
     app.run(debug=False)

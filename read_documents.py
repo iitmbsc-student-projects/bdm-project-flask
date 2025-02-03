@@ -27,7 +27,7 @@ def read_and_split_pdfs(directory, vector_store_path):
             #     total_characters += len(document.page_content)
 
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=4000,  
+        chunk_size=128000,  
         chunk_overlap=200, 
         add_start_index=True, 
     )
