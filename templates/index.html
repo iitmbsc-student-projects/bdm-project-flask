@@ -13,6 +13,22 @@
   </head>
   <body>
     <div class="container">
+
+      <div id="alert-box" class="alert-box">
+        <div class="alert-content">
+          <span class="close-btn" onclick="closeAlert()">&times;</span>
+          <h2>Welcome to Alshwin</h2>
+          <p>Your personalized AI-Driven Bot to help you with your BDM Project Queries. Example prompts:</p>
+          <ul>
+            <li>What are the rubrics to submit project proposal for BDM Project?</li>
+            <li>How to formulate the title for my BDM Project?</li>
+            <li>What are the rubrics for submitting the final submission for my BDM project?</li>
+            <li>What do we have to submit in the metadata and descriptive statistics?</li>
+          </ul>
+          <button onclick="closeAlert()">Let's Dive In</button>
+        </div>
+      </div>
+
       <h1>Alshwin</h1>
       <div id="chat-box"></div>
       <!-- <input
@@ -38,6 +54,10 @@
       const chatBox = document.getElementById("chat-box");
       const userInput = document.getElementById("user-input");
       const sendBtn = document.getElementById("send-btn");
+
+      function closeAlert() {
+        document.getElementById('alert-box').style.display = 'none';
+      }
 
       function sendMessage() {
         const message = userInput.value.trim();
