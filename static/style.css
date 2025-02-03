@@ -10,8 +10,8 @@ body {
 }
 
 .container {
-  width: 1300px;
-  height: 700px;
+  width: 1100px;
+  height: 600px;
   background: #fff;
   padding-top: 10px;
   padding-left: 20px;
@@ -31,7 +31,7 @@ h1 {
 }
 
 #chat-box {
-  height: 550px;
+  height: 450px;
   overflow-y: auto;
   margin-bottom: 10px;
   border: 1px solid #ddd;
@@ -92,12 +92,12 @@ h1 {
 
 .input-container {
   position: absolute;
-  width: 1300px;
+  width: 1100px;
 }
 
 #user-input {
-  width: 1250px;
-  padding: 10px 10px 10px 10px; /* Add padding to the right to make space for the button */
+  width: 1050px;
+  padding: 10px 10px 10px 10px; 
   border: 1px solid #ddd;
   border-radius: 4px;
   font-family: "Roboto", sans-serif;
@@ -106,19 +106,19 @@ h1 {
 
 #send-btn {
   position: absolute;
-  right: 20px; /* Position the button inside the input box */
+  right: 20px; 
   top: 50%;
-  transform: translateY(-50%); /* Vertically center the button */
+  transform: translateY(-50%); 
   background: none;
   border: none;
   cursor: pointer;
 }
 
 #send-btn i {
-  color: #06b6d4; /* Icon color */
+  color: #06b6d4; 
   font-size: 18px;
 }
 
 #send-btn:hover i {
-  color: #0e7490; /* Change icon color on hover */
+  color: #0e7490; 
 }
