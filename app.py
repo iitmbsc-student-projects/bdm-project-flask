@@ -7,6 +7,7 @@ import os
 from langchain.chains import ConversationalRetrievalChain
 from langchain_community.vectorstores import FAISS
 from langchain_groq import ChatGroq
+from langchain.schema import SystemMessage, HumanMessage
 
 app = Flask(__name__)
 init_db()
@@ -23,7 +24,8 @@ def load_model():
         model = ChatGroq(
             temperature=0.8,
             model="llama-3.3-70b-versatile",
-            groq_api_key= config["GROQ_API_KEY"]
+            groq_api_key= config["GROQ_API_KEY"],
+            streaming=True
         )
     return model
 
@@ -31,6 +33,9 @@ documents_dir = os.path.join(os.path.dirname(__file__), "documents")
 vector_store_path = os.path.join(os.path.dirname(__file__), "vector_store")
 vector_store, _, _, _, _ = read_and_split_pdfs(documents_dir, vector_store_path)
 model = load_model()
+
+system_message = SystemMessage(content="You are Alswhin, a bot designed to help the student with their queries related to Business Data Management (BDM) project. You use advanced language models and document retrieval techniques to provide accurate and relevant responses to user questions. For irrelevant questions, answer them by telling them you don't know. For relevant questions, give the best possible answer.")
+
 retrieval_chain = ConversationalRetrievalChain.from_llm(model, retriever=vector_store.as_retriever(), return_source_documents=True)
 chat_history = chat_history()
 
@@ -65,7 +70,10 @@ def chat():
     # response = chat_response.choices[0].message.content
 
     limited_chat_history_tuples = get_limited_chat_history(chat_history, limit=5)
-    response = retrieval_chain.invoke({"question": user_input, "chat_history": limited_chat_history_tuples})
+
+    messages = [system_message, HumanMessage(content=user_input)]
+
+    response = retrieval_chain.invoke({"question": user_input, "chat_history": limited_chat_history_tuples, "messages": messages})
 
     # insert_chat(user_input, response['answer'])
     # return jsonify({'response': response['answer'], 'stop': False})
