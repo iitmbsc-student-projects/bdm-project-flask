@@ -1,1 +1,4 @@
-./*.yaml
+*.yaml
+__pycache__/*
+*.db
+vector_store/*

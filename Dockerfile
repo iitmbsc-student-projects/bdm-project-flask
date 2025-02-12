@@ -1,7 +1,7 @@
-FROM python:3.10-slim
+FROM continuumio/miniconda3
 WORKDIR /app
 COPY . /app
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt --index-url https://download.pytorch.org/whl/cpu --extra-index-url https://pypi.org/simple && pip cache purge && conda clean --all
 EXPOSE 5000
 ENV FLASK_APP=app.py
 CMD ["python", "app.py"]
