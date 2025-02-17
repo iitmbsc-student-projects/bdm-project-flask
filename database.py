@@ -3,6 +3,7 @@ from datetime import datetime
 
 DB_NAME = "chatbot.db"
 
+
 def init_db():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -17,6 +18,7 @@ def init_db():
     conn.commit()
     conn.close()
 
+
 def insert_chat(question, answer):
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -28,6 +30,7 @@ def insert_chat(question, answer):
     conn.commit()
     conn.close()
 
+
 def fetch_all_chats():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -35,6 +38,7 @@ def fetch_all_chats():
     rows = cursor.fetchall()
     conn.close()
     return rows
+
 
 def chat_history():
     conn = sqlite3.connect(DB_NAME)
