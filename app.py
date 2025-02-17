@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from database import init_db, insert_chat, chat_history
 from read_documents import read_and_split_pdfs
 import yaml
@@ -52,6 +52,10 @@ chat_history = chat_history()
 def index():
     return render_template("index.html")
 
+@app.route('/documents/<filename>')
+def serve_pdf(filename):
+    documents_dir = 'documents' 
+    return send_from_directory(documents_dir, filename)
 
 @app.route("/chat", methods=["POST"])
 def chat():
