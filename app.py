@@ -15,6 +15,7 @@ with open("config.yaml", "r") as file:
     config = yaml.safe_load(file)
 model = None
 
+apikey = os.environ.get("GROQ_API_KEY")
 
 def load_model():
     global model
@@ -22,7 +23,8 @@ def load_model():
         model = ChatGroq(
             temperature=0.8,
             model="llama-3.3-70b-versatile",
-            groq_api_key=config["GROQ_API_KEY"],
+            # groq_api_key=config["GROQ_API_KEY"],
+            groq_api_key=apikey,
             streaming=True,
         )
     return model
@@ -89,7 +91,8 @@ def chat():
         sorted_pages = sorted(pages)
         page_str = ", ".join(map(str, sorted_pages))
 
-        link = f"{config['BASE_URL']}/documents/{quote(source)}"
+        # link = f"{config['BASE_URL']}/documents/{quote(source)}"
+        link = f"{os.environ.get("BASE_URL")}/documents/{quote(source)}
         source_info.append(
             f"{len(source_info) + 1}. [{source}]({link}), Page Number: {page_str}"
         )
