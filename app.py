@@ -11,12 +11,12 @@ from urllib.parse import quote
 app = Flask(__name__)
 init_db()
 
-with open("config.yaml", "r") as file:
-    config = yaml.safe_load(file)
+#with open("config.yaml", "r") as file:
+ #   config = yaml.safe_load(file)
 model = None
 
 apikey = os.environ.get("GROQ_API_KEY")
-
+base_url = os.environ.get("BASE_URL")
 def load_model():
     global model
     if model is None:
@@ -92,7 +92,7 @@ def chat():
         page_str = ", ".join(map(str, sorted_pages))
 
         # link = f"{config['BASE_URL']}/documents/{quote(source)}"
-        link = f"{os.environ.get("BASE_URL")}/documents/{quote(source)}
+        link = f"{base_url}/documents/{quote(source)}
         source_info.append(
             f"{len(source_info) + 1}. [{source}]({link}), Page Number: {page_str}"
         )
