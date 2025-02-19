@@ -110,4 +110,4 @@ if __name__ == "__main__":
     print(f"Total number of PDFs present: {total_pdfs}")
     print(f"Total number of split documents: {len(split_documents)}")
     print(f"Total number of split documents stored: {total_splits}")
-    app.run(debug=False)
+    app.run(host='0.0.0.0', port=5000, debug=False)
