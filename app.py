@@ -92,7 +92,7 @@ def chat():
         page_str = ", ".join(map(str, sorted_pages))
 
         # link = f"{config['BASE_URL']}/documents/{quote(source)}"
-        link = f"{base_url}/documents/{quote(source)}
+        link = f"{base_url}/documents/{quote(source)}"
         source_info.append(
             f"{len(source_info) + 1}. [{source}]({link}), Page Number: {page_str}"
         )
