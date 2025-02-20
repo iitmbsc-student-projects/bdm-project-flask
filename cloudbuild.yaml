@@ -31,7 +31,7 @@ steps:
       - '--region=$_DEPLOY_REGION'
       - '--quiet'
       - '--service-account=bdm-chatbot-test@temp-bq-project.iam.gserviceaccount.com'  # Custom service account
-      - '--set-env-vars=GROQ_API_KEY=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, base_url=http://localhost:5000/, PORT=5000'  # Set PORT to 5000
+      - '--set-env-vars=GROQ_API_KEY=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, base_url=http://localhost:5000/'
     id: Deploy
     entrypoint: 'gcloud'
  
