@@ -32,6 +32,7 @@ steps:
       - '--quiet'
       - '--service-account=bdm-chatbot-test@temp-bq-project.iam.gserviceaccount.com'  # Custom service account
       - '--set-env-vars=GROQ_API_KEY=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, base_url=http://localhost:5000/'
+      - '--timeout=600'
     id: Deploy
     entrypoint: 'gcloud'
  
