@@ -15,8 +15,6 @@ init_db()
  #   config = yaml.safe_load(file)
 model = None
 
-apikey = os.environ.get("GROQ_API_KEY")
-base_url = os.environ.get("BASE_URL")
 def load_model():
     global model
     if model is None:
@@ -107,7 +105,10 @@ if __name__ == "__main__":
     vector_store, total_characters, total_pdfs, split_documents, total_splits = (
         read_and_split_pdfs(documents_dir, vector_store_path)
     )
+    apikey = os.environ.get("GROQ_API_KEY")
+    base_url = os.environ.get("BASE_URL")
+    PORT = os.environ.get("PORT", "5000")
     print(f"Total number of PDFs present: {total_pdfs}")
     print(f"Total number of split documents: {len(split_documents)}")
     print(f"Total number of split documents stored: {total_splits}")
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=PORT, debug=False)
