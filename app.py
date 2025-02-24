@@ -110,4 +110,7 @@ if __name__ == "__main__":
     print(f"Total number of PDFs present: {total_pdfs}")
     print(f"Total number of split documents: {len(split_documents)}")
     print(f"Total number of split documents stored: {total_splits}")
+    print(f"Tthe apikey: {apikey}")
+    print(f"the base_url: {base_url}")
+    print(f"The port: {PORT}")
     app.run(host='0.0.0.0', port=PORT, debug=False)
