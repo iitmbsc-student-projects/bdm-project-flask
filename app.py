@@ -15,7 +15,7 @@ init_db()
  #   config = yaml.safe_load(file)
 model = None
 apikey = os.environ.get("GROQ_API_KEY")
-base_url = os.environ.get("BASE_URL")
+base_url = os.environ.get("base_url")
 PORT = os.environ.get("PORT", "5000")
 def load_model():
     global model
