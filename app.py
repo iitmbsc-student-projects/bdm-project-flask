@@ -16,14 +16,14 @@ init_db()
  #   config = yaml.safe_load(file)
 model = None
 apikey = os.environ.get("GROQ_API_KEY")
-base_url = os.environ.get("base_url")
+base_url = os.environ.get("base_url", "http://localhost:5000/")
 def load_model():
     global model
     if model is None:
         model = ChatGroq(
             temperature=0.8,
             model="llama-3.3-70b-versatile",
-            # groq_api_key=config["GROQ_API_KEY"],
+#            groq_api_key=config["GROQ_API_KEY"],
             groq_api_key=apikey,
             streaming=True,
         )
@@ -114,6 +114,6 @@ if __name__ == "__main__":
     print(f"Total number of PDFs present: {total_pdfs}")
     print(f"Total number of split documents: {len(split_documents)}")
     print(f"Total number of split documents stored: {total_splits}")
-    print(f"Tthe apikey: {apikey}")
+    #print(f"Tthe apikey: {apikey}")
     print(f"the base url {base_url}")
     app.run(host="0.0.0.0", port=5000, debug=False)
