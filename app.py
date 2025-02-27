@@ -9,6 +9,7 @@ from langchain.schema import SystemMessage, HumanMessage
 from urllib.parse import quote
 
 app = Flask(__name__)
+print(f"app.py started")
 init_db()
 
 #with open("config.yaml", "r") as file:
