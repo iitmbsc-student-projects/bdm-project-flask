@@ -15,6 +15,7 @@ init_db()
  #   config = yaml.safe_load(file)
 model = None
 apikey = os.environ.get("GROQ_API_KEY")
+base_url = os.environ.get("base_url")
 def load_model():
     global model
     if model is None:
@@ -94,7 +95,7 @@ def chat():
         page_str = ", ".join(map(str, sorted_pages))
 
         # link = f"{config['BASE_URL']}/documents/{quote(source)}"
-        link = f"http://localhost:5000/documents/{quote(source)}"
+        link = f"{base_url}/documents/{quote(source)}"
         source_info.append(
             f"{len(source_info) + 1}. [{source}]({link}), Page Number: {page_str}"
         )
@@ -113,4 +114,5 @@ if __name__ == "__main__":
     print(f"Total number of split documents: {len(split_documents)}")
     print(f"Total number of split documents stored: {total_splits}")
     print(f"Tthe apikey: {apikey}")
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    print(f"the base url {base_url}")
+    app.run(host="0.0.0.0", port=5000, debug=False)
