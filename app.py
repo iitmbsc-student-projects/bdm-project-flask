@@ -117,5 +117,4 @@ if __name__ == "__main__":
     print(f"Total number of split documents stored: {total_splits}")
     #print(f"Tthe apikey: {apikey}")
     print(f"the base url {base_url}")
-    print(f"the Port {Port}")
     app.run(host="0.0.0.0", port=5000, debug=False)
