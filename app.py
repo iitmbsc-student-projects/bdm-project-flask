@@ -16,7 +16,7 @@ init_db()
  #   config = yaml.safe_load(file)
 model = None
 apikey = os.environ.get("GROQ_API_KEY")
-base_url = os.environ.get("base_url", "http://localhost:5000/")
+base_url = os.environ.get("base_url")
 def load_model():
     global model
     if model is None:
@@ -106,6 +106,7 @@ def chat():
 
 
 if __name__ == "__main__":
+   # Port = int(os.environ.get("PORT", 5000))
     documents_dir = os.path.join(os.path.dirname(__file__), "documents")
     vector_store_path = os.path.join(os.path.dirname(__file__), "vector_store")
     vector_store, total_characters, total_pdfs, split_documents, total_splits = (
@@ -116,4 +117,5 @@ if __name__ == "__main__":
     print(f"Total number of split documents stored: {total_splits}")
     #print(f"Tthe apikey: {apikey}")
     print(f"the base url {base_url}")
+    print(f"the Port {Port}")
     app.run(host="0.0.0.0", port=5000, debug=False)
