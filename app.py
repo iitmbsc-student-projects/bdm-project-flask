@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify, send_from_directory, send_file
 from database import init_db, insert_chat, chat_history
 from read_documents import read_and_split_pdfs
 import yaml
@@ -7,6 +7,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain_groq import ChatGroq
 from langchain.schema import SystemMessage, HumanMessage
 from urllib.parse import quote
+import io
 
 app = Flask(__name__)
 print(f"app.py started")
@@ -58,10 +59,24 @@ def index():
 def health_check():
     return "ok", 200
 
+# @app.route('/documents/<filename>')
+# def serve_pdf(filename):
+#     documents_dir = 'documents' 
+#     return send_from_directory(documents_dir, filename)
+
 @app.route('/documents/<filename>')
 def serve_pdf(filename):
     documents_dir = 'documents' 
     return send_from_directory(documents_dir, filename)
+    documents_dir = os.path.join(os.path.dirname(__file__), "documents")
+    file_path = os.path.join(documents_dir, filename)
+    with open(file_path, 'rb') as bites:
+        return send_file(
+            io.BytesIO(bites.read()),
+            download_name=filename,
+            mimetype='application/pdf',
+            as_attachment=True
+        )
 
 @app.route("/chat", methods=["POST"])
 def chat():
