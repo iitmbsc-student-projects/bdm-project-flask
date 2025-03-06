@@ -131,5 +131,5 @@ if __name__ == "__main__":
     print(f"Total number of split documents: {len(split_documents)}")
     print(f"Total number of split documents stored: {total_splits}")
     #print(f"Tthe apikey: {apikey}")
-    print(f"the base url {base_url}")
+    print(f"the base url is {base_url}")
     app.run(host="0.0.0.0", port=5000, debug=False)
